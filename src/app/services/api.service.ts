@@ -10,9 +10,11 @@ import { YouTubeVideo, YouTubeVideoListResponse } from '../interfaces/interface'
 export class ApiService {
   private _storeVideos$ = new BehaviorSubject<YouTubeVideo[]>([]);
 
-  public filteredItems$ = this._storeVideos$.pipe(
-    map((array) => array)
-  );
+  // public filteredItems$ = this._storeVideos$.pipe(
+  //   map((array) => array)
+  // );
+
+  public filteredItems$ = this._storeVideos$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -35,14 +37,26 @@ export class ApiService {
     return this.filteredItems$
   }
 
-  search(word: string = ''): Observable<any> {
 
+  // our solution
+  // search(word: string = ''): Observable<any> {
+
+  //   return this.filteredItems$.pipe(
+  //     map((items) => items),
+  //     tap((data) => {
+  //       console.count();
+  //       const sth = data.filter(d => {
+  //         return d.snippet.title.toLowerCase().includes(word.toLowerCase())
+  //       })
+  //       this._storeVideos$.next(sth)
+  //     }))
+  // }
+
+  search(word: string = ''): Observable<YouTubeVideo[]> {
+    console.count()
     return this.filteredItems$.pipe(
-      map((items) => items),
-      tap((data) => {
-        console.count();
-        console.log(data.filter(d => d.snippet.title.toLowerCase().includes(word.toLowerCase())), 'filter')
-        this._storeVideos$.next(data.filter(d => d.snippet.title.toLowerCase().includes(word.toLowerCase())))
-      }))
+      map(items => items.filter(item => item.snippet.title.toLowerCase().includes(word.toLowerCase()))),
+      tap((items) => this._storeVideos$.next(items))
+    );
   }
 }
