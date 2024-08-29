@@ -1,0 +1,47 @@
+<section>
+    <div class="container d-flex flex-column align-items-center justify-content-center mb-lg-5">
+        <h2 class="fs-1 mb-lg-5">Login</h2>
+        <form [formGroup]="loginForm" class="d-grid w-50" (submit)="logIn()">
+
+            <div class="mb-3">
+
+                <div class="form-group mb-3">
+                    <label class="mb-1">Username</label>
+
+                    <input formControlName="username" autocomplete="off" type="text" name="username"
+                        class="form-control"
+                        [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+
+                    <small
+                        [class.d-none]="loginForm.get('username')?.valid || loginForm.get('username')?.untouched || loginForm.get('username')?.value.length > 0"
+                        class="text-danger me-1">Username is required!</small>
+
+                    <small
+                        [class.d-none]="loginForm.get('username')?.valid || loginForm.get('username')?.pristine || loginForm.get('username')?.value.length === 0"
+                        class="text-danger">Username length should be more than 4 patterns</small>
+                </div>
+
+
+
+                <div class="form-group mb-3">
+                    <label class="mb-1">Password</label>
+
+                    <input formControlName="password" autocomplete="off" type="password" class="form-control"
+                        name="password"
+                        [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+
+                    <small
+                        [class.d-none]="loginForm.get('password')?.valid || loginForm.get('password')?.untouched || loginForm.get('password')?.value.length > 0"
+                        class="text-danger me-1">Password is required!</small>
+
+                    <small
+                        [class.d-none]="loginForm.get('password')?.valid || loginForm.get('password')?.pristine || loginForm.get('password')?.value.length === 0"
+                        class="text-danger">Password should be more than 6 patterns!</small>
+
+                </div>
+            </div>
+            <button [disabled]="loginForm.invalid" class="btn btn-primary" type="submit"
+                style="cursor: pointer;">Log in</button>
+        </form>
+    </div>
+</section>

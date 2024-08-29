@@ -1,0 +1,75 @@
+<section>
+    <div class="container d-flex flex-column align-items-center justify-content-center mb-5">
+        <h2 class="fs-1 mb-5">Register</h2>
+        <form [formGroup]="registerForm" class="d-grid w-50" (submit)="signUp()">
+            <div class="mb-3">
+                <div class="form-group mb-3">
+                    <!-- Username | Firstname -->
+                    <label class="mb-1">Username | First Name</label>
+                    <input formControlName="username" autocomplete="off" type="text" class="form-control"
+                        name="username"
+                        [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+
+                    <small
+                        [class.d-none]="registerForm.get('username')?.valid || registerForm.get('username')?.untouched ||  registerForm.get('username')?.value.length > 0"
+                        class="text-danger me-1">Username is required!</small>
+
+                    <small
+                        [class.d-none]="registerForm.get('username')?.valid || registerForm.get('username')?.pristine || registerForm.get('username')?.value.length === 0"
+                        class="text-danger">Username length should be more than 4 letters</small>
+                </div>
+
+                <!-- Lastname -->
+                <div class="form-group mb-3">
+                    <label class="mb-1">Last Name</label>
+                    <input formControlName="lastname" autocomplete="off" type="text" class="form-control"
+                        name="lastname"
+                        [class.is-invalid]="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched">
+
+                    <small
+                        [class.d-none]="registerForm.get('lastname')?.valid || registerForm.get('lastname')?.untouched ||  registerForm.get('lastname')?.value.length > 0"
+                        class="text-danger me-1">Lastname is required!</small>
+
+                    <small
+                        [class.d-none]="registerForm.get('lastname')?.valid || registerForm.get('lastname')?.pristine || registerForm.get('lastname')?.value.length === 0"
+                        class="text-danger">Lastname length should be more than 4 letters</small>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group mb-3">
+                    <label class="mb-1">Email</label>
+                    <input formControlName="email" autocomplete="off" type="text" class="form-control" name="email"
+                    [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+
+                    <small
+                        [class.d-none]="registerForm.get('email')?.valid || registerForm.get('email')?.untouched ||  registerForm.get('email')?.value.length > 0"
+                        class="text-danger me-1">Email is required!</small>
+
+                    <small 
+                        [class.d-none]=" registerForm.get('email')?.valid || registerForm.get('email')?.pristine ||
+                        !registerForm.get('email')?.errors?.['invalidEmail']" class="text-danger">Email must be
+                        '&#64;gmail.com' or '&#64;email.com'</small>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group mb-3">
+                    <label class="mb-1">Password</label>
+                    <input formControlName="password" autocomplete="off" type="text" class="form-control"
+                        name="password"
+                        [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+
+                    <small
+                        [class.d-none]="registerForm.get('password')?.valid || registerForm.get('password')?.untouched ||  registerForm.get('password')?.value.length > 0"
+                        class="text-danger me-1">Password is required!</small>
+
+                    <small
+                        [class.d-none]="registerForm.get('password')?.valid || registerForm.get('password')?.pristine || registerForm.get('password')?.value.length === 0"
+                        class="text-danger">Password should be more than 6 patterns!</small>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid"
+                style="cursor: pointer;">Register</button>
+        </form>
+    </div>
+</section>

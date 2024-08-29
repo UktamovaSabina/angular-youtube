@@ -1,0 +1,20 @@
+<div class="video-card">
+    <div class="video-card-body">
+        <img [src]="data.snippet.thumbnails.default.url" class="card-img-top card-img" alt="{{ data.snippet.title }}">
+        <div class="social-media">
+            <small>view: <span>{{data.statistics.viewCount}}</span></small>
+            <small>like: <span>{{data.statistics.likeCount}}</span></small>
+            <small>dislike: <span>{{data.statistics.dislikeCount}}</span></small>
+        </div>
+        <h5 class="card-title">{{ data.snippet.title }}</h5>
+    </div>
+    <button class="btn btn-info m-3 text-light px-4 py-2" (click)="showModal()">more...</button>
+</div>
+
+<div [class.d-none]="details" class="details-wrapper">
+    <div class="details">
+        <button class="btn btn-danger" (click)="closeModal()">close</button>
+        <h2>{{ data.snippet.title }}</h2>
+        <p>{{ data.snippet.description }}</p>
+    </div>
+</div>
