@@ -37,21 +37,6 @@ export class ApiService {
     return this.filteredItems$
   }
 
-
-  // our solution
-  // search(word: string = ''): Observable<any> {
-
-  //   return this.filteredItems$.pipe(
-  //     map((items) => items),
-  //     tap((data) => {
-  //       console.count();
-  //       const sth = data.filter(d => {
-  //         return d.snippet.title.toLowerCase().includes(word.toLowerCase())
-  //       })
-  //       this._storeVideos$.next(sth)
-  //     }))
-  // }
-
   search(word: string = ''): Observable<YouTubeVideo[]> {
     console.count()
     return this.filteredItems$.pipe(
